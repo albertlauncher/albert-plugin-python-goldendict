@@ -12,6 +12,7 @@ md_name = "GoldenDict"
 md_description = "Quick access to GoldenDict"
 md_license = "MIT"
 md_url = "https://github.com/albertlauncher/albert-plugin-python-goldendict"
+md_readme_url = "https://github.com/albertlauncher/albert-plugin-python-goldendict/blob/main/README.md"
 md_authors = ["@ManuelSchneid3r"]
 
 
