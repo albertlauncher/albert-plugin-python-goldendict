@@ -6,7 +6,7 @@ import shutil
 
 from albert import *
 
-md_iid = "3.0"
+md_iid = "4.0"
 md_version = "2.1"
 md_name = "GoldenDict"
 md_description = "Quick access to GoldenDict"
@@ -35,7 +35,6 @@ class Plugin(PluginInstance, TriggerQueryHandler):
             raise RuntimeError(f'None of the GoldenDict distributions found.')
 
         self.executable = executables[0]
-        self.iconUrls = [f'xdg:{os.path.basename(self.executable)}']
 
         if len(executables) > 1:
             warning(f"Multiple GoldenDict commands found: {', '.join(executables)}")
@@ -51,7 +50,7 @@ class Plugin(PluginInstance, TriggerQueryHandler):
                 id=md_name,
                 text=md_name,
                 subtext=f"Look up '{q}' in GoldenDict",
-                iconUrls=self.iconUrls,
+                iconFactory=lambda: makeThemeIcon(os.path.basename(self.executable)),
                 actions=[Action(md_name, md_name, lambda e=self.executable: runDetachedProcess([e, q]))],
             )
         )
