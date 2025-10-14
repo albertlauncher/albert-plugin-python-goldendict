@@ -7,7 +7,7 @@ import shutil
 from albert import *
 
 md_iid = "4.0"
-md_version = "2.1"
+md_version = "2.1.1"
 md_name = "GoldenDict"
 md_description = "Quick access to GoldenDict"
 md_license = "MIT"
