@@ -50,7 +50,7 @@ class Plugin(PluginInstance, TriggerQueryHandler):
                 id=md_name,
                 text=md_name,
                 subtext=f"Look up '{q}' in GoldenDict",
-                iconFactory=lambda: makeThemeIcon(os.path.basename(self.executable)),
+                icon_factory=lambda: makeThemeIcon(os.path.basename(self.executable)),
                 actions=[Action(md_name, md_name, lambda e=self.executable: runDetachedProcess([e, q]))],
             )
         )
