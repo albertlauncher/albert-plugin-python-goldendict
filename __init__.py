@@ -6,7 +6,7 @@ import shutil
 
 from albert import *
 
-md_iid = "4.0"
+md_iid = "5.0"
 md_version = "2.1.1"
 md_name = "GoldenDict"
 md_description = "Quick access to GoldenDict"
@@ -16,11 +16,11 @@ md_readme_url = "https://github.com/albertlauncher/albert-plugin-python-goldendi
 md_authors = ["@ManuelSchneid3r"]
 
 
-class Plugin(PluginInstance, TriggerQueryHandler):
+class Plugin(PluginInstance, GeneratorQueryHandler):
 
     def __init__(self):
         PluginInstance.__init__(self)
-        TriggerQueryHandler.__init__(self)
+        GeneratorQueryHandler.__init__(self)
 
         commands = [
             '/var/lib/flatpak/exports/bin/org.goldendict.GoldenDict',  # flatpak
@@ -43,14 +43,19 @@ class Plugin(PluginInstance, TriggerQueryHandler):
     def defaultTrigger(self):
         return "gd "
 
-    def handleTriggerQuery(self, query):
-        q = query.string.strip()
-        query.add(
+    def items(self, ctx):
+        yield [
             StandardItem(
                 id=md_name,
                 text=md_name,
-                subtext=f"Look up '{q}' in GoldenDict",
+                subtext=f"Look up '{ctx.query}' in GoldenDict",
                 icon_factory=lambda: makeThemeIcon(os.path.basename(self.executable)),
-                actions=[Action(md_name, md_name, lambda e=self.executable: runDetachedProcess([e, q]))],
+                actions=[
+                    Action(
+                        md_name,
+                        md_name,
+                        lambda e=self.executable, q=ctx.query: runDetachedProcess([e, q])
+                    )
+                ],
             )
-        )
+        ]
