@@ -49,7 +49,7 @@ class Plugin(PluginInstance, GeneratorQueryHandler):
                 id=md_name,
                 text=md_name,
                 subtext=f"Look up '{ctx.query}' in GoldenDict",
-                icon_factory=lambda: makeThemeIcon(os.path.basename(self.executable)),
+                icon_factory=lambda: Icon.theme(os.path.basename(self.executable)),
                 actions=[
                     Action(
                         md_name,
